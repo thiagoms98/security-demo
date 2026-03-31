@@ -6,7 +6,6 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 // Configuração de Sessão Segura (Mitigação para Sequestro de Sessão)
 // Uso de cookies seguros e controle adequado.
 app.use(
@@ -95,8 +94,10 @@ app.get("/logout", (req, res) => {
   res.send("Sessão encerrada com sucesso.");
 });
 
-const port = process.env.PORT || 3000;
+// O Azure geralmente injeta a porta 8080 na variável process.env.PORT
+const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+// O '0.0.0.0' é crucial: ele diz ao Express para aceitar conexões de fora do contêiner
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });

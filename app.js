@@ -94,10 +94,9 @@ app.get("/logout", (req, res) => {
   res.send("Sessão encerrada com sucesso.");
 });
 
-// O Azure geralmente injeta a porta 8080 na variável process.env.PORT
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
-// O '0.0.0.0' é crucial: ele diz ao Express para aceitar conexões de fora do contêiner
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Servidor rodando na porta ${port}`);
+// Remova o '0.0.0.0', deixe apenas a variável port
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
 });
